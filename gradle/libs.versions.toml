@@ -17,8 +17,10 @@ ktxCore = "1.13.1"
 leakCanary = "2.14"
 lifecycle = "2.8.0"
 material = "1.12.0"
-minSdk = "21"
+minSdk = "26"
 sortDependencies = "0.6"
+agp = "8.4.0"
+kotlin = "1.9.0"
 
 [libraries]
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -43,3 +45,7 @@ gradle-versions-plugin = { module = "com.github.ben-manes:gradle-versions-plugin
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
 square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
+androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
