@@ -31,7 +31,10 @@ class MVITaskListViewModel(
         }
     }
 
-    private fun processEvent(event: TaskListStateUpdateEvent): StateAndSideEffects<MVITaskListViewState, TaskListSideEffect> {
+    private fun processEvent(
+        currentState: MVITaskListViewState,
+        event: TaskListStateUpdateEvent,
+    ): StateAndSideEffects<MVITaskListViewState, TaskListSideEffect> {
         return when (event) {
             is TaskListStateUpdateEvent.SetError -> {
                 MVITaskListViewState.Error(event.error).noSideEffects()
