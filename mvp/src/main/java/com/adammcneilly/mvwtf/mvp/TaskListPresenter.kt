@@ -1,9 +1,10 @@
 package com.adammcneilly.mvwtf.mvp
 
+import com.adammcneilly.mvwtf.core.Task
+import com.adammcneilly.mvwtf.core.TaskListViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -18,7 +19,7 @@ class TaskListPresenter(
 
     private val presenterScope = CoroutineScope(coroutineContext)
 
-    private var state = TaskListContract.View.State()
+    private var state = TaskListViewState.loading()
         set(value) {
             field = value
             view?.render(value)
@@ -29,24 +30,13 @@ class TaskListPresenter(
             return
         }
 
-        state = state.copy(
-            isLoading = true,
-        )
+        setLoading()
 
         presenterScope.launch {
-            delay(DELAY_MS)
-
             try {
-                val tasks = model.getTasks()
-                state = state.copy(
-                    isLoading = false,
-                    tasks = tasks,
-                )
+                setTasks(model.getTasks())
             } catch (e: Exception) {
-                state = state.copy(
-                    isLoading = false,
-                    error = e.message ?: "Something went wrong",
-                )
+                setError(e.message.toString())
             }
         }
     }
@@ -56,15 +46,23 @@ class TaskListPresenter(
         job.cancel()
     }
 
-    override fun getState(): TaskListContract.View.State {
+    override fun getState(): TaskListViewState {
         return state
     }
 
-    override fun restoreState(state: TaskListContract.View.State) {
+    override fun restoreState(state: TaskListViewState) {
         this.state = state
     }
 
-    companion object {
-        const val DELAY_MS = 3_000L
+    private fun setLoading() {
+        state = TaskListViewState.loading()
+    }
+
+    private fun setTasks(tasks: List<Task>) {
+        state = TaskListViewState.success(tasks)
+    }
+
+    private fun setError(error: String) {
+        state = TaskListViewState.error(error)
     }
 }
