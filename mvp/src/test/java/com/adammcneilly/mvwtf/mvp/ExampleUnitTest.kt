@@ -1,4 +1,4 @@
-package com.adammcneilly.mvwtf.core
+package com.adammcneilly.mvwtf.mvp
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
