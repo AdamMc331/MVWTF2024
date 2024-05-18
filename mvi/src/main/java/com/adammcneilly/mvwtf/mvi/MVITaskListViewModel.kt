@@ -31,8 +31,8 @@ class MVITaskListViewModel(
         }
     }
 
-    private fun processEvent(event: TaskListStateUpdateEvent): StateAndSideEffects<MVITaskListViewState, TaskListSideEffect> =
-        when (event) {
+    private fun processEvent(event: TaskListStateUpdateEvent): StateAndSideEffects<MVITaskListViewState, TaskListSideEffect> {
+        return when (event) {
             is TaskListStateUpdateEvent.SetError -> {
                 MVITaskListViewState.Error(event.error).noSideEffects()
             }
@@ -45,6 +45,7 @@ class MVITaskListViewModel(
                 MVITaskListViewState.Success(event.tasks).noSideEffects()
             }
         }
+    }
 
     private fun fetchTasks() {
         viewModelScope.launch {
