@@ -23,7 +23,7 @@ class TaskListPresenter(
         view?.showLoading()
 
         presenterScope.launch {
-            delay(3_000)
+            delay(DELAY_MS)
 
             try {
                 val tasks = model.getTasks()
@@ -37,5 +37,9 @@ class TaskListPresenter(
     override fun viewDestroyed() {
         view = null
         job.cancel()
+    }
+
+    companion object {
+        const val DELAY_MS = 3_000
     }
 }
