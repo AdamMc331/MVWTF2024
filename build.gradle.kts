@@ -30,6 +30,7 @@ apply(from = "buildscripts/versionsplugin.gradle")
 
 subprojects {
     apply(from = "../buildscripts/detekt.gradle")
+    apply(plugin = "com.squareup.sort-dependencies")
 }
 
 tasks.register("clean", Delete::class) {
