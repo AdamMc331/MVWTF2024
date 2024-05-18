@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import com.adammcneilly.mvwtf.theme.MVWTFTheme
+import com.adammcneilly.mvwtf.core.theme.MVWTFTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
