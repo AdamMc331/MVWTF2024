@@ -8,3 +8,4 @@ dependencyResolutionManagement {
 rootProject.name = "MVWTF"
 include(":core")
 include(":mvp")
+include(":mvvm")
