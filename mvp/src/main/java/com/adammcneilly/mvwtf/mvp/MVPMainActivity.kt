@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import com.adammcneilly.mvwtf.core.ErrorScreen
 import com.adammcneilly.mvwtf.core.LoadingScreen
 import com.adammcneilly.mvwtf.core.TaskList
+import com.adammcneilly.mvwtf.core.TaskListViewState
 
 class MVPMainActivity : ComponentActivity(), TaskListContract.View {
     private val presenter = TaskListPresenter(this, InMemoryTaskRepository())
@@ -17,7 +18,7 @@ class MVPMainActivity : ComponentActivity(), TaskListContract.View {
         enableEdgeToEdge()
 
         val state = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            savedInstanceState?.getParcelable(STATE_KEY, TaskListContract.View.State::class.java)
+            savedInstanceState?.getParcelable(STATE_KEY, TaskListViewState::class.java)
         } else {
             @Suppress("DEPRECATION")
             savedInstanceState?.getParcelable(STATE_KEY)
@@ -40,12 +41,12 @@ class MVPMainActivity : ComponentActivity(), TaskListContract.View {
         super.onDestroy()
     }
 
-    override fun render(state: TaskListContract.View.State) {
+    override fun render(state: TaskListViewState) {
         setContent {
             if (state.isLoading) {
                 LoadingScreen()
             } else if (state.error != null) {
-                ErrorScreen(state.error)
+                ErrorScreen(state.error.orEmpty())
             } else {
                 TaskList(state.tasks)
             }

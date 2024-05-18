@@ -2,47 +2,26 @@ package com.adammcneilly.mvwtf.mvvm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.adammcneilly.mvwtf.core.Task
+import com.adammcneilly.mvwtf.core.TaskListViewState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class TaskListViewModel(
     taskRepository: TaskRepository,
 ) : ViewModel() {
-    data class State(
-        val isLoading: Boolean = true,
-        val tasks: List<Task> = emptyList(),
-        val error: String? = null,
-    )
-
-    private val mutableState = MutableStateFlow(State())
+    private val mutableState = MutableStateFlow(TaskListViewState.loading())
     val state = mutableState.asStateFlow()
 
     init {
-        mutableState.update { currentState ->
-            currentState.copy(
-                isLoading = true,
-            )
-        }
+        mutableState.value = TaskListViewState.loading()
 
         viewModelScope.launch {
             try {
                 val tasks = taskRepository.getTasks()
-                mutableState.update { currentState ->
-                    currentState.copy(
-                        isLoading = false,
-                        tasks = tasks,
-                    )
-                }
+                mutableState.value = TaskListViewState.success(tasks)
             } catch (e: Exception) {
-                mutableState.update { currentState ->
-                    currentState.copy(
-                        isLoading = false,
-                        error = e.message ?: "Something went wrong",
-                    )
-                }
+                mutableState.value = TaskListViewState.error(e.message ?: "Something went wrong")
             }
         }
     }
