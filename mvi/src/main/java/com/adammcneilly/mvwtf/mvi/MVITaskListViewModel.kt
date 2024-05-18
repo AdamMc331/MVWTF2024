@@ -9,8 +9,8 @@ class MVITaskListViewModel(
 ) : ViewModel() {
     private val stateMachine = StateMachine<MVITaskListViewState, TaskListStateUpdateEvent, TaskListSideEffect>(
         initialState = MVITaskListViewState.Loading,
-        eventProcessor = { _, event ->
-            processEvent(event)
+        eventProcessor = { currentState, event ->
+            processEvent(currentState, event)
         },
         sideEffectProcessor = { sideEffect ->
             processSideEffect(sideEffect)
