@@ -7,3 +7,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MVWTF"
 include(":app")
+include(":core")
