@@ -1,6 +1,8 @@
 package com.adammcneilly.mvwtf.mvp
 
+import android.os.Parcelable
 import com.adammcneilly.mvwtf.core.Task
+import kotlinx.parcelize.Parcelize
 
 object TaskListContract {
     interface Model {
@@ -8,15 +10,21 @@ object TaskListContract {
     }
 
     interface View {
-        fun showTasks(tasks: List<Task>)
+        fun render(state: State)
 
-        fun showLoading()
-
-        fun showError(message: String)
+        @Parcelize
+        data class State(
+            val isLoading: Boolean = true,
+            val tasks: List<Task> = emptyList(),
+            val error: String? = null,
+        ) : Parcelable
     }
 
     interface Presenter {
         fun viewCreated()
         fun viewDestroyed()
+
+        fun getState(): View.State
+        fun restoreState(state: View.State)
     }
 }

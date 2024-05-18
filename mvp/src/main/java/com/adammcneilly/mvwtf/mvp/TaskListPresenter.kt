@@ -19,17 +19,35 @@ class TaskListPresenter(
 
     private val presenterScope = CoroutineScope(coroutineContext)
 
+    private var state = TaskListContract.View.State()
+        set(value) {
+            field = value
+            view?.render(value)
+        }
+
     override fun viewCreated() {
-        view?.showLoading()
+        if (state.tasks.isNotEmpty()) {
+            return
+        }
+
+        state = state.copy(
+            isLoading = true,
+        )
 
         presenterScope.launch {
             delay(DELAY_MS)
 
             try {
                 val tasks = model.getTasks()
-                view?.showTasks(tasks)
+                state = state.copy(
+                    isLoading = false,
+                    tasks = tasks,
+                )
             } catch (e: Exception) {
-                view?.showError(e.message.toString())
+                state = state.copy(
+                    isLoading = false,
+                    error = e.message ?: "Something went wrong",
+                )
             }
         }
     }
@@ -37,6 +55,14 @@ class TaskListPresenter(
     override fun viewDestroyed() {
         view = null
         job.cancel()
+    }
+
+    override fun getState(): TaskListContract.View.State {
+        return state
+    }
+
+    override fun restoreState(state: TaskListContract.View.State) {
+        this.state = state
     }
 
     companion object {
