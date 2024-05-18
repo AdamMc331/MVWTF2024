@@ -1,31 +1,26 @@
 plugins {
-    id("com.android.application")
-    id("com.google.devtools.ksp")
-    id("com.squareup.sort-dependencies")
+    id("com.android.library")
     id("kotlin-android")
-    id("org.jmailen.kotlinter")
 }
 
 android {
+    namespace = "com.adammcneilly.mvwtf.core"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.adammcneilly.mvwtf"
         minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.compileSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -45,20 +40,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    namespace = "com.adammcneilly.mvwtf"
 }
 
 dependencies {
 
     implementation(platform(libs.compose.bom))
-    implementation(project(":core"))
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.appcompat)
@@ -68,16 +54,8 @@ dependencies {
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
 
-    debugImplementation(platform(libs.compose.bom))
-    debugImplementation(libs.compose.ui.test.manifest)
-    debugImplementation(libs.compose.ui.tooling)
-    debugImplementation(libs.square.leakcanary)
-
-
     testImplementation(libs.junit)
 
-    androidTestImplementation(platform(libs.compose.bom))
-    androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.junit)
-    androidTestImplementation(libs.compose.ui.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }

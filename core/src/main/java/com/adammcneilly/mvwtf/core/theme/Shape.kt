@@ -1,4 +1,4 @@
-package com.adammcneilly.mvwtf.theme
+package com.adammcneilly.mvwtf.core.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
