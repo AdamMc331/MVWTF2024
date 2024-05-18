@@ -1,4 +1,4 @@
-package template
+package com.adammcneilly.mvwtf
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,7 +9,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import template.theme.TemplateTheme
+import com.adammcneilly.mvwtf.theme.MVWTFTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             ConfigureEdgeToEdgeWindow()
 
-            TemplateTheme {
+            MVWTFTheme {
                 Surface(
                     color = MaterialTheme.colorScheme.background,
                 ) {

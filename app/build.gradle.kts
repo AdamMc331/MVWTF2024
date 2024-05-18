@@ -1,7 +1,5 @@
 plugins {
-    id("app.cash.paparazzi")
     id("com.android.application")
-    id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
     id("com.squareup.sort-dependencies")
     id("kotlin-android")
@@ -12,7 +10,7 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "template.app.id"
+        applicationId = "com.adammcneilly.mvwtf"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.compileSdk.get().toInt()
         versionCode = 1
@@ -54,15 +52,11 @@ android {
         }
     }
 
-    namespace = "template"
+    namespace = "com.adammcneilly.mvwtf"
 }
 
 dependencies {
-    ksp(libs.androidx.room.compiler)
-    ksp(libs.hilt.compiler)
-    ksp(libs.square.moshi.kotlin.codegen)
 
-    kspAndroidTest(libs.hilt.android.compiler)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.android.material)
@@ -70,21 +64,15 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.room.runtime)
     implementation(libs.compose.material)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling)
-    implementation(libs.hilt.android)
-    implementation(libs.square.moshi.kotlin)
-    implementation(libs.square.retrofit)
-    implementation(libs.square.retrofit.converter.moshi)
 
     debugImplementation(platform(libs.compose.bom))
     debugImplementation(libs.compose.ui.test.manifest)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.square.leakcanary)
 
-    annotationProcessor(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
 
@@ -92,5 +80,4 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
     androidTestImplementation(libs.androidx.test.junit)
     androidTestImplementation(libs.compose.ui.test.junit)
-    androidTestImplementation(libs.hilt.android.testing)
 }
