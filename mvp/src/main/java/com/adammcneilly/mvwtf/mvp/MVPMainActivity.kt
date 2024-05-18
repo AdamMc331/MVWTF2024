@@ -10,7 +10,6 @@ import com.adammcneilly.mvwtf.core.LoadingScreen
 import com.adammcneilly.mvwtf.core.TaskList
 
 class MVPMainActivity : ComponentActivity(), TaskListContract.View {
-
     private val presenter = TaskListPresenter(this, InMemoryTaskRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,4 +56,3 @@ class MVPMainActivity : ComponentActivity(), TaskListContract.View {
         private const val STATE_KEY = "state"
     }
 }
-

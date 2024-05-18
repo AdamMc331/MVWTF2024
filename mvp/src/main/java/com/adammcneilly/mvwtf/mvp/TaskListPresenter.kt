@@ -11,7 +11,6 @@ class TaskListPresenter(
     private var view: TaskListContract.View?,
     private val model: TaskListContract.Model,
 ) : TaskListContract.Presenter {
-
     private val job = Job()
 
     private val coroutineContext: CoroutineContext

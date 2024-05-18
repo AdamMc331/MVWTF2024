@@ -19,7 +19,7 @@ fun ErrorScreen(
         Text(
             text = message,
             modifier = Modifier
-                .align(Alignment.Center)
+                .align(Alignment.Center),
         )
     }
 }

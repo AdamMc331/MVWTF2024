@@ -22,9 +22,11 @@ object TaskListContract {
 
     interface Presenter {
         fun viewCreated()
+
         fun viewDestroyed()
 
         fun getState(): View.State
+
         fun restoreState(state: View.State)
     }
 }
