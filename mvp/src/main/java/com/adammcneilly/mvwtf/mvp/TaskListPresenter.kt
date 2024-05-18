@@ -40,6 +40,6 @@ class TaskListPresenter(
     }
 
     companion object {
-        const val DELAY_MS = 3_000
+        const val DELAY_MS = 3_000L
     }
 }
