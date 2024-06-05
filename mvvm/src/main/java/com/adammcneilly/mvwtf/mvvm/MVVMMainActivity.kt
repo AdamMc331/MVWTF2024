@@ -15,11 +15,11 @@ import com.adammcneilly.mvwtf.core.LoadingScreen
 import com.adammcneilly.mvwtf.core.TaskList
 
 class MVVMMainActivity : ComponentActivity() {
-    private val viewModel: TaskListViewModel by viewModels {
+    private val viewModel: MVVMTaskListViewModel by viewModels {
         object : ViewModelProvider.Factory {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 @Suppress("UNCHECKED_CAST")
-                return TaskListViewModel(InMemoryTaskRepository()) as T
+                return MVVMTaskListViewModel(MVVMInMemoryTaskRepository()) as T
             }
         }
     }

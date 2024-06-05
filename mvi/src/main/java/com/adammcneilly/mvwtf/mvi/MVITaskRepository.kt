@@ -1,7 +1,7 @@
-package com.adammcneilly.mvwtf.mvvm
+package com.adammcneilly.mvwtf.mvi
 
 import com.adammcneilly.mvwtf.core.Task
 
-interface TaskRepository {
+interface MVITaskRepository {
     suspend fun getTasks(): List<Task>
 }

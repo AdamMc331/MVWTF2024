@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class TaskListViewModel(
-    taskRepository: TaskRepository,
+class MVVMTaskListViewModel(
+    taskRepository: MVVMTaskRepository,
 ) : ViewModel() {
     private val mutableState: MutableStateFlow<MVVMTaskListViewState> = MutableStateFlow(MVVMTaskListViewState.Loading)
     val state = mutableState.asStateFlow()

@@ -2,7 +2,7 @@ package com.adammcneilly.mvwtf.mvp
 
 import com.adammcneilly.mvwtf.core.Task
 
-object TaskListContract {
+object MVPTaskListContract {
     interface Model {
         suspend fun getTasks(): List<Task>
     }

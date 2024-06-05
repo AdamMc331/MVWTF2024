@@ -9,8 +9,8 @@ import com.adammcneilly.mvwtf.core.ErrorScreen
 import com.adammcneilly.mvwtf.core.LoadingScreen
 import com.adammcneilly.mvwtf.core.TaskList
 
-class MVPMainActivity : ComponentActivity(), TaskListContract.View {
-    private val presenter = TaskListPresenter(this, InMemoryTaskRepository())
+class MVPMainActivity : ComponentActivity(), MVPTaskListContract.View {
+    private val presenter = MVPTaskListPresenter(this, MVPInMemoryTaskRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

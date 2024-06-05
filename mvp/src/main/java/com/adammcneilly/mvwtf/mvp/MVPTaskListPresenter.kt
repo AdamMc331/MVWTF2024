@@ -7,10 +7,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class TaskListPresenter(
-    private var view: TaskListContract.View?,
-    private val model: TaskListContract.Model,
-) : TaskListContract.Presenter {
+class MVPTaskListPresenter(
+    private var view: MVPTaskListContract.View?,
+    private val model: MVPTaskListContract.Model,
+) : MVPTaskListContract.Presenter {
     private val job = Job()
 
     private val coroutineContext: CoroutineContext

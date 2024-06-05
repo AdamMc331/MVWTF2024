@@ -1,9 +1,9 @@
-package com.adammcneilly.mvwtf.mvp
+package com.adammcneilly.mvwtf.mvvm
 
 import com.adammcneilly.mvwtf.core.Task
 import kotlinx.coroutines.delay
 
-class InMemoryTaskRepository : TaskListContract.Model {
+class MVVMInMemoryTaskRepository : MVVMTaskRepository {
     override suspend fun getTasks(): List<Task> {
         delay(DELAY_MS)
 

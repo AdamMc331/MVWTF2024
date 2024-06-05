@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 class MVITaskListViewModel(
-    private val taskRepository: TaskRepository,
+    private val taskRepository: MVITaskRepository,
 ) : ViewModel() {
     private val stateMachine = StateMachine<MVITaskListViewState, TaskListStateUpdateEvent, TaskListSideEffect>(
         initialState = MVITaskListViewState.Loading,
