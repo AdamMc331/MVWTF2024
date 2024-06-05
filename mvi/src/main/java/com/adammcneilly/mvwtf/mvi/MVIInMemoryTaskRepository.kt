@@ -3,7 +3,7 @@ package com.adammcneilly.mvwtf.mvi
 import com.adammcneilly.mvwtf.core.Task
 import kotlinx.coroutines.delay
 
-class InMemoryTaskRepository : TaskRepository {
+class MVIInMemoryTaskRepository : MVITaskRepository {
     override suspend fun getTasks(): List<Task> {
         delay(DELAY_MS)
 

@@ -1,17 +1,16 @@
 package com.adammcneilly.mvwtf.mvp
 
 import com.adammcneilly.mvwtf.core.Task
-import com.adammcneilly.mvwtf.core.TaskListViewState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class TaskListPresenter(
-    private var view: TaskListContract.View?,
-    private val model: TaskListContract.Model,
-) : TaskListContract.Presenter {
+class MVPTaskListPresenter(
+    private var view: MVPTaskListContract.View?,
+    private val model: MVPTaskListContract.Model,
+) : MVPTaskListContract.Presenter {
     private val job = Job()
 
     private val coroutineContext: CoroutineContext
@@ -19,7 +18,7 @@ class TaskListPresenter(
 
     private val presenterScope = CoroutineScope(coroutineContext)
 
-    private var state = TaskListViewState.loading()
+    private var state = MVPTaskListViewState.loading()
         set(value) {
             field = value
             view?.render(value)
@@ -46,23 +45,23 @@ class TaskListPresenter(
         job.cancel()
     }
 
-    override fun getState(): TaskListViewState {
+    override fun getState(): MVPTaskListViewState {
         return state
     }
 
-    override fun restoreState(state: TaskListViewState) {
+    override fun restoreState(state: MVPTaskListViewState) {
         this.state = state
     }
 
     private fun setLoading() {
-        state = TaskListViewState.loading()
+        state = MVPTaskListViewState.loading()
     }
 
     private fun setTasks(tasks: List<Task>) {
-        state = TaskListViewState.success(tasks)
+        state = MVPTaskListViewState.success(tasks)
     }
 
     private fun setError(error: String) {
-        state = TaskListViewState.error(error)
+        state = MVPTaskListViewState.error(error)
     }
 }

@@ -8,17 +8,16 @@ import androidx.activity.enableEdgeToEdge
 import com.adammcneilly.mvwtf.core.ErrorScreen
 import com.adammcneilly.mvwtf.core.LoadingScreen
 import com.adammcneilly.mvwtf.core.TaskList
-import com.adammcneilly.mvwtf.core.TaskListViewState
 
-class MVPMainActivity : ComponentActivity(), TaskListContract.View {
-    private val presenter = TaskListPresenter(this, InMemoryTaskRepository())
+class MVPMainActivity : ComponentActivity(), MVPTaskListContract.View {
+    private val presenter = MVPTaskListPresenter(this, MVPInMemoryTaskRepository())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
         val state = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            savedInstanceState?.getParcelable(STATE_KEY, TaskListViewState::class.java)
+            savedInstanceState?.getParcelable(STATE_KEY, MVPTaskListViewState::class.java)
         } else {
             @Suppress("DEPRECATION")
             savedInstanceState?.getParcelable(STATE_KEY)
@@ -41,7 +40,7 @@ class MVPMainActivity : ComponentActivity(), TaskListContract.View {
         super.onDestroy()
     }
 
-    override fun render(state: TaskListViewState) {
+    override fun render(state: MVPTaskListViewState) {
         setContent {
             if (state.isLoading) {
                 LoadingScreen()
