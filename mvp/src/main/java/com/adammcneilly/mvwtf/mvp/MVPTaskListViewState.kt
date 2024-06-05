@@ -1,33 +1,34 @@
-package com.adammcneilly.mvwtf.core
+package com.adammcneilly.mvwtf.mvp
 
 import android.os.Parcelable
+import com.adammcneilly.mvwtf.core.Task
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class TaskListViewState internal constructor(
+data class MVPTaskListViewState internal constructor(
     val isLoading: Boolean,
     val tasks: List<Task>,
     val error: String?,
 ) : Parcelable {
     companion object {
-        fun loading(): TaskListViewState {
-            return TaskListViewState(
+        fun loading(): MVPTaskListViewState {
+            return MVPTaskListViewState(
                 isLoading = true,
                 tasks = emptyList(),
                 error = null,
             )
         }
 
-        fun success(tasks: List<Task>): TaskListViewState {
-            return TaskListViewState(
+        fun success(tasks: List<Task>): MVPTaskListViewState {
+            return MVPTaskListViewState(
                 isLoading = false,
                 tasks = tasks,
                 error = null,
             )
         }
 
-        fun error(error: String): TaskListViewState {
-            return TaskListViewState(
+        fun error(error: String): MVPTaskListViewState {
+            return MVPTaskListViewState(
                 isLoading = false,
                 tasks = emptyList(),
                 error = error,

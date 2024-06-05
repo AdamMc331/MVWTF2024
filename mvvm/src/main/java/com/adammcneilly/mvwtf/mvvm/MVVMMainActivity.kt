@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.adammcneilly.mvwtf.core.ErrorScreen
 import com.adammcneilly.mvwtf.core.LoadingScreen
 import com.adammcneilly.mvwtf.core.TaskList
-import com.adammcneilly.mvwtf.core.TaskListViewState
 
 class MVVMMainActivity : ComponentActivity() {
     private val viewModel: TaskListViewModel by viewModels {
@@ -37,13 +36,17 @@ class MVVMMainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun Render(state: TaskListViewState) {
-        if (state.isLoading) {
-            LoadingScreen()
-        } else if (state.error != null) {
-            ErrorScreen(state.error.orEmpty())
-        } else {
-            TaskList(state.tasks)
+    private fun Render(state: MVVMTaskListViewState) {
+        when (state) {
+            is MVVMTaskListViewState.Error -> {
+                ErrorScreen(state.error)
+            }
+            is MVVMTaskListViewState.Loaded -> {
+                TaskList(state.tasks)
+            }
+            MVVMTaskListViewState.Loading -> {
+                LoadingScreen()
+            }
         }
     }
 }

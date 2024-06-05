@@ -3,7 +3,6 @@ package com.adammcneilly.mvwtf.mvvm
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.adammcneilly.mvwtf.core.Task
-import com.adammcneilly.mvwtf.core.TaskListViewState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -11,7 +10,7 @@ import kotlinx.coroutines.launch
 class TaskListViewModel(
     taskRepository: TaskRepository,
 ) : ViewModel() {
-    private val mutableState = MutableStateFlow(TaskListViewState.loading())
+    private val mutableState: MutableStateFlow<MVVMTaskListViewState> = MutableStateFlow(MVVMTaskListViewState.Loading)
     val state = mutableState.asStateFlow()
 
     init {
@@ -27,14 +26,14 @@ class TaskListViewModel(
     }
 
     private fun setLoading() {
-        mutableState.value = TaskListViewState.loading()
+        mutableState.value = MVVMTaskListViewState.Loading
     }
 
     private fun setTasks(tasks: List<Task>) {
-        mutableState.value = TaskListViewState.success(tasks)
+        mutableState.value = MVVMTaskListViewState.Loaded(tasks)
     }
 
     private fun setError(error: String) {
-        mutableState.value = TaskListViewState.error(error)
+        mutableState.value = MVVMTaskListViewState.Error(error)
     }
 }

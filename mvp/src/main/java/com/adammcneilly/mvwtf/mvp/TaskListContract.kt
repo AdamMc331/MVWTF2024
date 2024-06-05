@@ -1,7 +1,6 @@
 package com.adammcneilly.mvwtf.mvp
 
 import com.adammcneilly.mvwtf.core.Task
-import com.adammcneilly.mvwtf.core.TaskListViewState
 
 object TaskListContract {
     interface Model {
@@ -9,7 +8,7 @@ object TaskListContract {
     }
 
     interface View {
-        fun render(state: TaskListViewState)
+        fun render(state: MVPTaskListViewState)
     }
 
     interface Presenter {
@@ -17,8 +16,8 @@ object TaskListContract {
 
         fun viewDestroyed()
 
-        fun getState(): TaskListViewState
+        fun getState(): MVPTaskListViewState
 
-        fun restoreState(state: TaskListViewState)
+        fun restoreState(state: MVPTaskListViewState)
     }
 }
