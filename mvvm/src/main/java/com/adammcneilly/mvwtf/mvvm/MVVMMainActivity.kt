@@ -14,6 +14,15 @@ import com.adammcneilly.mvwtf.core.ErrorScreen
 import com.adammcneilly.mvwtf.core.LoadingScreen
 import com.adammcneilly.mvwtf.core.TaskList
 
+/**
+ * This is the main entry point into the MVVM sample application.
+ *
+ * This class will observe state from an [MVVMTaskListViewModel], and then
+ * make a call to [Render] any time that state changes.
+ *
+ * State is persisted across configuration due to the fact that [MVVMTaskListViewModel]
+ * extends from the Android architecture components.
+ */
 class MVVMMainActivity : ComponentActivity() {
     private val viewModel: MVVMTaskListViewModel by viewModels {
         object : ViewModelProvider.Factory {

@@ -3,6 +3,11 @@ package com.adammcneilly.mvwtf.mvvm
 import com.adammcneilly.mvwtf.core.Task
 import kotlinx.coroutines.delay
 
+/**
+ * A simple implementation of [MVVMTaskRepository] that returns
+ * a hardcoded list of tasks. There is a fake delay to demonstrate
+ * the loading scenario.
+ */
 class MVVMInMemoryTaskRepository : MVVMTaskRepository {
     override suspend fun getTasks(): List<Task> {
         delay(DELAY_MS)
